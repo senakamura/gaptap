@@ -1,23 +1,53 @@
-if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
+/*****************************************************************************/
+/* Subscriptions */
+/*****************************************************************************/
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
-    }
-  });
+Meteor.subscribe('puns');
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
-  });
-}
+/*****************************************************************************/
+/* Initial State */
+/*****************************************************************************/
 
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
-}
+Session.setDefault('page', 'showMain');
+
+/*****************************************************************************/
+/* RPC (Remote Procedure Call) Methods */
+/*****************************************************************************/
+
+/*****************************************************************************/
+/* Template Helpers */
+/*****************************************************************************/
+
+UI.body.helpers({
+  isPage: function (page) {
+    return Session.equals('page', page);
+  }
+});
+
+Template.ShowGive.helpers({
+
+});
+
+// /*****************************************************************************/
+// /* Template Events */
+// ***************************************************************************
+
+UI.body.events({
+  'click .clickChangesPage': function(event, template) {
+    Session.set('page', event.currentTarget.getAttribute('data-page'));
+  }
+});
+
+Template.ShowGive.events({
+  'submit form': function (e, tmpl) {
+    e.preventDefault();
+
+    var prompt = tmpl.find('[name=prompt]').value;
+    var answer = tmpl.find('[name=answer]').value;
+
+    Puns.insert({
+      'prompt': prompt,
+      'answer': answer
+    });
+  }
+});
