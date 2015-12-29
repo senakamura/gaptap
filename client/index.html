@@ -1,6 +1,8 @@
 <head>
   <title>gaptap</title>
   <link href='https://fonts.googleapis.com/css?family=Spicy+Rice' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/app.css">
 </head>
 
@@ -21,25 +23,31 @@
 </body>
 
 <template name="ShowMain">
-  <h1>welcome to gaptap</h1>
-  <button class="btn clickChangesPage" data-page="showGive">give a pun</button>
-  <button class="btn clickChangesPage" data-page="showTake">take a pun</button>
+  <div class="container">
+    <h1 class="item">welcome to gaptap</h1>
+    <button class="item btn clickChangesPage" data-page="showGive">give a pun</button>
+    <button class="item btn clickChangesPage" data-page="showTake">take a pun</button>
+  </div>
 </template>
 
 <template name="ShowGive">
-  <h1>give a pun</h1>
-  <form>
-    <input autofocus type="text" name="prompt" placeholder="pun prompt...">
-    <input type="text" name="answer" placeholder="answer...">
-    <button type="submit" class="btn">Submit!</button>
-  </form>
-  <button class="btn clickChangesPage" data-page="showMain">Return</button>
+  <div class="container">
+    <h1 class="item">give a pun</h1>
+    <form class="item container">
+      <input autofocus type="text" name="prompt" class="item input" placeholder=" pun prompt...">
+      <input type="text" name="answer" class="item" placeholder=" answer...">
+      <button id="submit" type="submit" class="item btn">Submit!</button>
+    </form>
+    <button class="item btn clickChangesPage" data-page="showMain">return</button>
+  </div>
 </template>
 
 <template name="ShowTake">
-  <h1>take a pun</h1>
-  <div>
-    <p>This is my pun.</p>
+  <div class="container">
+    <h1 class="item">take a pun</h1>
+    <p class="item">This is my pun.</p>
+    <p class="item">This is more pun.</p>
+    <button class="item btn" data-page="showMain">More Pun</button>
+    <button class="item btn clickChangesPage" data-page="showMain">Return</button>
   </div>
-  <button class="btn clickChangesPage" data-page="showMain">Return</button>
 </template>
