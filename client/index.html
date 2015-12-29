@@ -36,7 +36,7 @@
     <form class="item container">
       <input autofocus type="text" name="prompt" class="item input" placeholder=" pun prompt...">
       <input type="text" name="answer" class="item" placeholder=" answer...">
-      <button id="submit" type="submit" class="item btn">Submit!</button>
+      <button id="submit" type="submit" class="item btn">submit!</button>
     </form>
     <button class="item btn clickChangesPage" data-page="showMain">return</button>
   </div>
@@ -45,9 +45,13 @@
 <template name="ShowTake">
   <div class="container">
     <h1 class="item">take a pun</h1>
-    <p class="item">This is my pun.</p>
-    <p class="item">This is more pun.</p>
-    <button class="item btn" data-page="showMain">More Pun</button>
-    <button class="item btn clickChangesPage" data-page="showMain">Return</button>
+    {{> Pun}}
+    <button class="item btn" id="getPun">more pun</button>
+    <button class="item btn clickChangesPage" data-page="showMain">return</button>
   </div>
+</template>
+
+<template name="Pun">
+  <p>{{prompt}}</p>
+  <p>{{answer}}</p>
 </template>

@@ -28,6 +28,14 @@ Template.ShowGive.helpers({
 
 });
 
+Template.ShowTake.helpers({
+  getPun: function () {
+    var pun = Puns.findOne();
+    console.log(pun);
+    return pun;
+  }
+});
+
 // /*****************************************************************************/
 // /* Template Events */
 // ***************************************************************************
@@ -42,6 +50,7 @@ Template.ShowGive.events({
   'submit form': function (e, tmpl) {
     e.preventDefault();
 
+    var form = tmpl.find('form');
     var prompt = tmpl.find('[name=prompt]').value;
     var answer = tmpl.find('[name=answer]').value;
 
@@ -49,5 +58,20 @@ Template.ShowGive.events({
       'prompt': prompt,
       'answer': answer
     });
+
+    form.reset();
+  }
+});
+
+Template.ShowTake.onRendered({
+  // Should load a pun on render.
+});
+
+Template.ShowTake.events({
+  // Should load a pun when "More Pun" btn is clicked.
+  'click #getPun': function (e, tmpl) {
+    e.preventDefault();
+
+    getPun();
   }
 });
