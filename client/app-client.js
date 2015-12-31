@@ -29,10 +29,11 @@ Template.ShowGive.helpers({
 });
 
 Template.ShowTake.helpers({
-  getPun: function () {
-    var pun = Puns.findOne();
-    console.log(pun);
-    return pun;
+  pun: function () {
+    var array = Puns.find().fetch();
+    var randomIndex = Math.floor( Math.random() * array.length );
+    var element = array[randomIndex];
+    return element;
   }
 });
 
@@ -47,12 +48,12 @@ UI.body.events({
 });
 
 Template.ShowGive.events({
-  'submit form': function (e, tmpl) {
-    e.preventDefault();
+  'submit form': function (event, template) {
+    event.preventDefault();
 
-    var form = tmpl.find('form');
-    var prompt = tmpl.find('[name=prompt]').value;
-    var answer = tmpl.find('[name=answer]').value;
+    var form = template.find('form');
+    var prompt = template.find('[name=prompt]').value;
+    var answer = template.find('[name=answer]').value;
 
     Puns.insert({
       'prompt': prompt,
@@ -60,18 +61,29 @@ Template.ShowGive.events({
     });
 
     form.reset();
+    alert('Thanks!');
   }
 });
 
-Template.ShowTake.onRendered({
-  // Should load a pun on render.
-});
+// Template.ShowTake.onRendered({
+
+// });
 
 Template.ShowTake.events({
   // Should load a pun when "More Pun" btn is clicked.
-  'click #getPun': function (e, tmpl) {
-    e.preventDefault();
+  'click #getPun': function (event, template) {
+    event.preventDefault();
 
-    getPun();
+    // console.log(this);
+    // debugger;
+
+
+    var array = Puns.find().fetch();
+    var randomIndex = Math.floor( Math.random() * array.length );
+    var element = array[randomIndex];
+
+    console.log(element);
+    return element;
+
   }
 });
