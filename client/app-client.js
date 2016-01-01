@@ -9,6 +9,7 @@ Meteor.subscribe('puns');
 /*****************************************************************************/
 
 Session.setDefault('page', 'showMain');
+Session.setDefault('pun', null);
 
 /*****************************************************************************/
 /* RPC (Remote Procedure Call) Methods */
@@ -29,12 +30,9 @@ Template.ShowGive.helpers({
 });
 
 Template.ShowTake.helpers({
-  pun: function () {
-    var array = Puns.find().fetch();
-    var randomIndex = Math.floor( Math.random() * array.length );
-    var element = array[randomIndex];
-    return element;
-  }
+  // getPun: function (pun) {
+  //   return Session.equals('pun', pun);
+  // }
 });
 
 // /*****************************************************************************/
@@ -71,19 +69,12 @@ Template.ShowGive.events({
 
 Template.ShowTake.events({
   // Should load a pun when "More Pun" btn is clicked.
-  'click #getPun': function (event, template) {
-    event.preventDefault();
-
-    // console.log(this);
-    // debugger;
-
-
+  'click [data-action="getPun"]': function (event, template) {
     var array = Puns.find().fetch();
     var randomIndex = Math.floor( Math.random() * array.length );
-    var element = array[randomIndex];
-
-    console.log(element);
-    return element;
-
+    pun = array[randomIndex];
+    console.log(pun);
+    return pun;
+    // Session.set('pun', pun);
   }
 });
